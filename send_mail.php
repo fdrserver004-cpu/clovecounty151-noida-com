@@ -16,7 +16,7 @@ $countryCode = trim($_POST['COUNTRYCODE'] ?? '');
 $project  = trim($_POST['mx_Project_Name'] ?? '');
 $location = trim($_POST['mx_City'] ?? '');
 $client   = trim($_POST['CLIENT'] ?? '');
-
+$client   = trim($_POST['DOMAIN'] ?? '');
 /* ===== FULL PHONE ===== */
 if ($countryCode !== '') {
     $countryCode = ltrim($countryCode, '+');
@@ -31,12 +31,6 @@ if (!$name || !$email || !$phone) {
     exit;
 }
 
-/* ================= AUTO PROJECT URL ================= */
-
-
-$projectUrl = $_SERVER['HTTP_REFERER'] ?? (
-    (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://"
-) . $_SERVER['HTTP_HOST'] . "/";
 
 
 /* ================= CRM ================= */
@@ -131,7 +125,7 @@ $sheetRow = [
     $geo['city'],
     $client,
     $crmSuccess ? 'SUCCESS' : 'FAILED',
-    $projectUrl
+    $client
 ];
 
 $spreadsheetId = "1_3xJfI4wh-Zx3liNjSC3oRl157qSp99J6-fKDfuoRZ8";
